@@ -7,7 +7,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="http://thirdweb.com/">thirdweb</a>!
+          Welcome to <a href="http://thirdweb.com/">BASE</a>!
         </h1>
 
         <div className={styles.connect}>
@@ -16,12 +16,11 @@ const Home: NextPage = () => {
 
         <div className={styles.connect}>
           <Web3Button
-          contractAddress={"0x7Fc61eBCc06e324f04Ad2Fe0d25C44Ae79101208"}
-          //action={(contract) => contract.erc721.claim(1)}
+          contractAddress={"0x8B0Acf13633c77C36982825a289Ea1D449cb33e0"}
           action={(contract) => {
-            contract.erc1155.lazyMint(1, "ipfs://Qmcny3J5yGpWjJsvR92DQAZcHYWLDep6GdgdKJTRxU1qyo", "0x0");
+            contract.erc1155.claim(0, 1);
           }}
-          onSuccess={() => alert("Claimed!")}
+          onSuccess={async () => await alert("Claimed!")}
           onError={(error) => alert(error.message)}
           >
             Mint
