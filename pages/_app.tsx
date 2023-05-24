@@ -1,5 +1,6 @@
 import type { AppProps } from "next/app";
 import { ThirdwebProvider, coinbaseWallet, localWallet, metamaskWallet, paperWallet, smartWallet } from "@thirdweb-dev/react";
+import { API_KEY, FACTORY_ADDRESS, CLIENT_ID } from "../constants/addresses";
 import { BaseGoerli } from "@thirdweb-dev/chains";
 
 
@@ -16,17 +17,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThirdwebProvider activeChain={activeChain}
     supportedWallets={[
     smartWallet({
-      factoryAddress: '0xB9363F27ac474A8Dd250cC02e28aC18c3b5E7c5F',
-      thirdwebApiKey: '6553f9f9a0b9ac8020484929cbc5a9ce7d2ca88c266b83d9f9b0aef08cc7c7cba31860772381f86f1c751dbb1148ea9e0fe9d9f21daa0bdb834f7012535ec786',
+      factoryAddress: FACTORY_ADDRESS,
+      thirdwebApiKey: API_KEY,
       gasless: true,
       personalWallets: [coinbaseWallet(), metamaskWallet(), localWallet(), paperWallet({
-        clientId: '675a1c42-9260-42c4-9d00-23aaaf3c4080',
+        clientId: CLIENT_ID,
       }), ],
 
     }),
 
     paperWallet({
-      clientId: '675a1c42-9260-42c4-9d00-23aaaf3c4080',
+      clientId: CLIENT_ID,
     }),
     // coinbaseWallet(),
     // metamaskWallet(),
