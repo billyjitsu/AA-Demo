@@ -2,26 +2,30 @@ import {
   ConnectWallet,
   Web3Button,
   useAddress,
-  useDisconnect,
   useContract,
   useNFT,
   useOwnedNFTs,
+  MediaRenderer,
 } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
 import { NFT_ADDRESS } from "../constants/addresses";
 import React from "react";
+import { useEffect } from "react";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const address = useAddress();
-  const disconnect = useDisconnect();
   const { contract } = useContract(NFT_ADDRESS);
-  const { data } = useNFT(contract, 0); //Data of tokenID
+ // const { data } = useNFT(contract, 0); //Data of tokenID
   const { data: ownedNFTs, isLoading: loadingOwnedNFTs } = useOwnedNFTs(
     contract,
     address
   );
   const [transferAddress, setTransferAddress] = React.useState("");
+
+  useEffect(() => {
+    console.log("Owned NFTs", ownedNFTs?.length);
+  }, [address, ownedNFTs]);
 
   return (
     <div className={styles.container}>
@@ -30,19 +34,19 @@ const Home: NextPage = () => {
           Welcome to <a href="http://thirdweb.com/">BASE</a>!
         </h1>
 
-        <div className={styles.connect}>
+        <div >
           <ConnectWallet />
         </div>
 
-        <div className={styles.connect}>
+        <div >
           {!loadingOwnedNFTs &&
             ownedNFTs &&
             ownedNFTs.map((nft, index) => (
               <>
-                <img
+                
+                <MediaRenderer
                   key={index}
                   src={nft.metadata.image}
-                  alt={nft.metadata.name}
                   className={styles.nftImage}
                 />
 
@@ -53,7 +57,7 @@ const Home: NextPage = () => {
                   placeholder="Enter address to transfer NFT"
                   className={styles.inputField}
                 />
-
+                { transferAddress && transferAddress.length > 0 && (
                 <Web3Button
                   contractAddress={NFT_ADDRESS}
                   action={(contract) =>
@@ -64,29 +68,25 @@ const Home: NextPage = () => {
                     )
                   }
                   onSubmit={() => setTransferAddress("")}
-                  // onSuccess={() =>
-                  //     toast({
-                  //     title: 'Transfer Completed.',
-                  //     description: "Your element has been transferred.",
-                  //     status: 'success',
-                  //     duration: 9000,
-                  //     isClosable: true,
-                  // })
-                  // }
+                  onError={(error) => alert(error.message)}
                 >
                   Transfer
                 </Web3Button>
+                )}
               </>
             ))}
 
-          {address && !ownedNFTs && (
+    
+
+          {address && (!ownedNFTs || ownedNFTs.length < 1) && (
             <Web3Button
               contractAddress={NFT_ADDRESS}
               action={(contract) => {
                 contract.erc1155.claim(0, 1);
               }}
-              //onSuccess={async () => await alert("Claimed!")}
-              onError={(error) => alert(error.message)}
+              
+              // onSuccess={() => alert("Claimed!")}
+              onError={(error) => console.log(error.message)}
             >
               Mint
             </Web3Button>
