@@ -16,7 +16,6 @@ import type { NextPage } from "next";
 import { NFT_ADDRESS } from "../constants/addresses";
 import React from "react";
 import { useEffect } from "react";
-import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   // Use hooks to get values
@@ -28,6 +27,7 @@ const Home: NextPage = () => {
   );
   const [transferAddress, setTransferAddress] = React.useState("");
 
+  //Just the wallet for any owned NFTs
   useEffect(() => {
     console.log("Owned NFTs", ownedNFTs?.length);
   }, [address, ownedNFTs]);
@@ -71,13 +71,7 @@ const Home: NextPage = () => {
                   {/* In this case, we are sending to the address set in the input, the tokenID of the NFT, the amount of 1 */}
                   <Web3Button
                     contractAddress={NFT_ADDRESS}
-                    action={(contract) =>
-                      contract.erc1155.transfer(
-                        transferAddress,
-                        nft.metadata.id,
-                        1
-                      )
-                    }
+                    action={(contract) => contract.erc1155.transfer(transferAddress, nft.metadata.id, 1)}
                     onSubmit={() => setTransferAddress("")}
                     onError={(error) => alert(error.message)}
                   >
@@ -93,10 +87,7 @@ const Home: NextPage = () => {
             {/* In this case, we are claiming tokenID 0 and recieving 1 of them */}
             <Web3Button
               contractAddress={NFT_ADDRESS}
-              action={(contract) => {
-                contract.erc1155.claim(0, 1);
-              }}
-              // onSuccess={() => alert("Claimed!")}
+              action={(contract) => {contract.erc1155.claim(0, 1)}}
               onError={(error) => console.log(error.message)}
             >
               Mint
