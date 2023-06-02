@@ -81,10 +81,10 @@ const Home: NextPage = () => {
               </>
             ))}
 
+
+          {/* Hook to run a claim function on your contract.  Connects to contract.typeofcontract.function(with function parameters) */}
+          {/* In this case, we are claiming tokenID 0 and recieving 1 of them */}
           {address && (!ownedNFTs || ownedNFTs.length < 1) && (
-            <>
-            {/* Hook to run a claim function on your contract.  Connects to contract.typeofcontract.function(with function parameters) */}
-            {/* In this case, we are claiming tokenID 0 and recieving 1 of them */}
             <Web3Button
               contractAddress={NFT_ADDRESS}
               action={(contract) => {contract.erc1155.claim(0, 1)}}
@@ -92,7 +92,6 @@ const Home: NextPage = () => {
             >
               Mint
             </Web3Button>
-            </>
           )}
         </div>
       </main>
