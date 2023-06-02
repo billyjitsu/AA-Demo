@@ -87,7 +87,7 @@ const Home: NextPage = () => {
           {address && (!ownedNFTs || ownedNFTs.length < 1) && (
             <Web3Button
               contractAddress={NFT_ADDRESS}
-              action={(contract) => {contract.erc1155.claim(0, 1)}}
+              action={(contract) => contract.erc1155.claim(0, 1)}
               onError={(error) => console.log(error.message)}
             >
               Mint
