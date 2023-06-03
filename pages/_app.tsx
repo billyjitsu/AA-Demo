@@ -33,11 +33,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     }),
 
-    //Wallets can also sit externally of the smart wallet (pay their own gas)
-    paperWallet({
-      clientId: CLIENT_ID,
-    }),
-    // coinbaseWallet(),
+    // Wallets can also sit externally of the smart wallet (pay their own gas), They sit outside of the smart wallet brackes
+    // but still within the supported wallets array
+    
+    // paperWallet({
+    //   clientId: CLIENT_ID,
+    // }),
+     coinbaseWallet(),
     // metamaskWallet(),
     // localWallet(),
     
