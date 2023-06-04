@@ -1,3 +1,14 @@
+## Account Abstraction Demo
+
+Demo showing the ability to have two user experiences on your DAPP. Transaction paid by the user (using Coinbase Wallet) and transaction covered by the host (having Coinbase Wallet, Metamask, Paper Wallet and Thirdweb's Guest Wallet as options).
+
+This repo will connect you to existing NFT and smart contracts deployed on BASE network. 
+You must **generate your own API Key** from the [ThirdWeb](https://thirdweb.com/) dashboard for the Smart Wallet functions to work.
+
+The "Client ID" is generated from Paper Wallet to add in external wallet functionality such as using your Gmail as a wallet.  You can get this ID from https://withpaper.com/.  *It is not necessary to use this and can be commented out in the code, adding is as an option to see the capabilities of what can be done.
+
+
+
 ## Getting Started
 
 Create a project using this example:
