@@ -27,9 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       gasless: true,
       //Adding options for wallets to be used in the smart wallet
       //Paperwallet is an exteranl wallet option that requires a clientId
-      personalWallets: [coinbaseWallet(), metamaskWallet(), localWallet(), paperWallet({
-        clientId: CLIENT_ID,
-      }), ],
+      personalWallets: [coinbaseWallet(), metamaskWallet(), localWallet(), ],
 
     }),
 
